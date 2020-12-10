@@ -45,12 +45,6 @@ else()
 	MESSAGE("LIB: ${MYSQL_LIBRARY}")
 endif()
 
-include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(MYSQL
-  FOUND_VAR MYSQL_FOUND
-  REQUIRED_VARS MYSQL_LIBRARY MYSQL_INCLUDE_DIR
-  )
-
 mark_as_advanced(
   MYSQL_LIBRARY
   MYSQL_INCLUDE_DIR
