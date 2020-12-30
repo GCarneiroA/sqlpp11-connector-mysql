@@ -16,12 +16,12 @@ target_sources(sqlpp-mysql PRIVATE ${sqlpp_SRCs})
 target_sources(sqlpp-mysql-static PRIVATE ${sqlpp_SRCs})
 
 target_link_libraries(sqlpp-mysql
-	PUBLIC sqlpp11::sqlpp11
+	sqlpp11::sqlpp11
 	MySQL::MySQL
 )
 
 target_link_libraries(sqlpp-mysql-static
-	PUBLIC sqlpp11::sqlpp11
+	sqlpp11::sqlpp11
 	MySQL::MySQL
 )
 
@@ -40,3 +40,6 @@ target_include_directories(sqlpp-mysql-static INTERFACE
 )
 
 install(TARGETS sqlpp-mysql sqlpp-mysql-static DESTINATION lib)
+install(TARGETS sqlpp-mysql sqlpp-mysql-static
+	EXPORT ${PROJECT_NAME}Targets
+)

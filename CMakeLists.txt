@@ -24,7 +24,7 @@
 
 cmake_minimum_required(VERSION 3.14)
 include(CheckCXXSymbolExists)
-project (sqlpp11-connector-mysql)
+project(sqlpp11-connector-mysql VERSION 0.29)
 enable_testing()
 
 option(ENABLE_TESTS "Build unit tests" On)
@@ -55,3 +55,31 @@ endif()
 
 
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/include/sqlpp11" DESTINATION include)
+
+install(EXPORT ${PROJECT_NAME}Targets DESTINATION lib/cmake/${PROJECT_NAME} FILE ${PROJECT_NAME}Targets.cmake NAMESPACE sqlpp11::)
+
+include(CMakePackageConfigHelpers)
+# generate the config file that is includes the exports
+configure_package_config_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+    INSTALL_DESTINATION "lib/cmake/${PROJECT_NAME}"
+)
+# generate the version file for the config file
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY AnyNewerVersion
+)
+
+# install the configuration file
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+    DESTINATION lib/cmake/${PROJECT_NAME}
+    COMPONENT Devel
+)
+
+export(EXPORT ${PROJECT_NAME}Targets
+    FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Targets.cmake"
+)
