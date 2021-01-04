@@ -37,7 +37,7 @@ find_package(MySql REQUIRED)
 
 message(STATUS "Using ${CMAKE_CXX_COMPILER} (compiler id: ${CMAKE_CXX_COMPILER_ID})")
 
-add_subdirectory(dependencies)
+add_subdirectory(third_party)
 
 IF(MSVC)
     add_definitions(-DNOMINMAX)
